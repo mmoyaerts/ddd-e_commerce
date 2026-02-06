@@ -1,5 +1,7 @@
 # Context Map
 
+Voir docs/context-map.png
+
 ## Relations et patterns
 
 | Contexte source             | Contexte cible              | Pattern de relation  | Justification                                                                                                                                                                                                                                                                                                                                                      |
