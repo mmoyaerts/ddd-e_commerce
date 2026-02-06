@@ -18,7 +18,7 @@ La satisfaction utilisateur est une priorité car les avis pèsent énormément 
 |-------------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Responsable e-commerce  | Direction    | Supervise l’activité commerciale, analyse les ventes et optimise les performances. Il définit les stratégies de livraison, de prix et de satisfaction client.           |
 | Préparateur de commande | Opérationnel | Travaille dans l’entrepôt et prépare les commandes clients. Il vérifie les produits, emballe les colis et les transmet au transporteur.                               |
-| Transporteur            | Partenaire   | Assure l’acheminement des colis depuis l’entrepôt jusqu’au client final. Il gère la livraison, le suivi des colis, les délais et le traitement des incidents éventuels. |
+| Transporteur            | Opérationnel  | Assure l’acheminement des colis depuis l’entrepôt jusqu’au client final. Il gère la livraison, le suivi des colis, les délais et le traitement des incidents éventuels. |
 | Client                  | Client final | Navigue sur la plateforme, passe commande et choisit un mode de livraison. Il suit son colis et peut contacter le support en cas de problème.                         |
 
 
