@@ -1,30 +1,63 @@
 # Ubiquitous Language
 
-| Terme (PascalCase)   | Définition métier                                                                                                                                                        | Exemple concret                                                           |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| Client               | Personne qui utilise la plateforme e-commerce pour consulter des produits et passer commande. Il possède un compte, un historique d’achats et des adresses de livraison. | Marie crée un compte, commande un casque audio et suit sa livraison.      |
-| CompteClient         | Espace personnel du client contenant ses informations (email, mot de passe, adresses, historique). Permet l’authentification et la gestion des commandes.                | Paul se connecte à son CompteClient pour consulter ses commandes passées. |
-| CatalogueProduit     | Ensemble des produits disponibles à la vente sur la plateforme. Chaque produit possède une fiche descriptive, un prix et un stock.                                       | Le CatalogueProduit affiche des smartphones, vêtements et accessoires.    |
-| Produit              | Article individuel vendu sur la plateforme e-commerce avec un prix et une référence unique. Il peut être physique et nécessiter une livraison.                           | Un smartphone Samsung disponible à 399€ est un Produit.                   |
-| TypeProduit         | Regroupement d'article permetant de catégoriser et de regrouper les produits.                                                              | Le type produit casque va contenir le produit casque sans fil Samsung et le produit casque filaire predator.                    |
-| Stock                | Quantité disponible d’un produit dans l’entrepôt. Il est mis à jour après chaque commande ou réapprovisionnement.                                                        | Le Stock du casque audio passe de 10 à 9 après une commande.              |
-| Panier               | Espace temporaire où le client ajoute des produits avant validation de la commande. Il peut être modifié jusqu’au paiement.                                              | Marie ajoute un livre et un casque dans son Panier.                       |
-| LignePanier          | Élément du panier correspondant à un produit et une quantité. Plusieurs lignes peuvent composer un panier.                                                               | 2 t-shirts dans le Panier constituent une LignePanier.                    |
-| Commande             | Ensemble des produits validés par le client et payés. Elle déclenche le processus logistique et de livraison.                                                            | Après paiement, la Commande #1024 est créée.                              |
-| LigneCommande        | Détail d’un produit spécifique dans une commande avec quantité et prix. Permet de préparer et facturer précisément.                                                      | La commande contient une LigneCommande pour un casque audio.              |
-| Paiement             | Transaction financière permettant de valider une commande. Peut être effectué par carte bancaire ou autre moyen.                                                         | Le Paiement par carte valide la commande de 59€.                          |
-| StatutPaiement             | Etat du paiement. Permet de vérifier si le paiement a été validé ou non.                                                        | Le Statut paiement est refusé si le client n'a pas les sous.                          |
-| ConfirmationCommande | Message envoyé au client après validation du paiement. Confirme que la commande est enregistrée.                                                                         | Le client reçoit un email de ConfirmationCommande.                        |
-| Entrepot             | Lieu physique où sont stockés les produits et préparées les commandes. Central dans la logistique.                                                                       | L’Entrepot de Lyon prépare les colis du jour.                             |
-| PreparationCommande  | Processus de collecte, vérification et emballage des produits commandés. Réalisé par un préparateur.                                                                     | Le préparateur lance la PreparationCommande #1024.                        |
-| PreparateurCommande  | Employé opérationnel chargé de préparer les colis dans l’entrepôt. Suit les instructions du système.                                                                     | Alex, PreparateurCommande, emballe la commande.                           |
-| Colis                | Ensemble des produits emballés et prêts à être expédiés. Possède un numéro de suivi unique.                                                                              | Le Colis #COL789 est remis au transporteur.                               |
-| Transporteur         | Employé chargée d’acheminer le colis jusqu’au client final. Met à jour le suivi de livraison.                                                                            | Chronopost agit comme Transporteur pour la livraison.                     |
-| Livraison            | Processus d’acheminement du colis vers l’adresse du client. Peut être standard ou express.                                                                               | La Livraison est prévue sous 48h.                                         |
-| AdresseLivraison     | Adresse physique où le colis doit être livré. Choisie par le client lors de la commande.                                                                                 | Marie sélectionne son AdresseLivraison à Lyon.                            |
-| SuiviLivraison       | Informations en temps réel sur l’état d’acheminement du colis. Accessible au client.                                                                                     | Le SuiviLivraison indique “en cours de livraison”.                        |
-| StatutCommande       | État actuel d’une commande (en attente, payée, préparée, expédiée, livrée). Permet le suivi global.                                                                      | Le StatutCommande passe à “expédiée”.                                     |
-| RetardLivraison      | Situation où la livraison dépasse le délai prévu. Peut déclencher une notification client.                                                                               | Un RetardLivraison de 24h est signalé au client.                          |
-| RetourProduit        | Processus par lequel un client renvoie un produit reçu. Peut entraîner un remboursement.                                                                                 | Le client lance un RetourProduit pour un article défectueux.              |
-| Notification         | Message envoyé au client ou aux employés pour informer d’un événement du système.                                                                                        | Une Notification informe que le colis est livré.                          |
-| ResponsableEcommerce | Acteur directionnel supervisant ventes, logistique et performance globale. Analyse les indicateurs.                                                                      | Le ResponsableEcommerce consulte les statistiques de livraison.           |
+Ce document définit le langage métier commun utilisé par les acteurs du domaine e-commerce.
+Les termes sont exprimés en **PascalCase** et partagés entre les équipes métier et techniques.
+Certains termes sont **contextuels** et prennent leur sens principal dans un Bounded Context donné.
+
+---
+
+## Glossaire métier
+
+| Terme (PascalCase) | Définition métier | Exemple concret |
+|--------------------|------------------|-----------------|
+| Client | Personne qui utilise la plateforme e-commerce pour consulter des produits et passer commande. | Marie crée un compte et passe une commande. |
+| CompteClient | Espace personnel du client contenant ses informations et son historique. | Paul se connecte à son CompteClient. |
+| CatalogueProduit | Ensemble des produits proposés à la vente sur la plateforme. | Le CatalogueProduit affiche des smartphones. |
+| Produit | Article vendu sur la plateforme avec un prix et une référence unique. | Un casque audio est un Produit. |
+| TypeProduit | Catégorie permettant de regrouper des produits similaires. | Le TypeProduit “Casque” regroupe plusieurs modèles. |
+| Panier | Espace temporaire contenant les produits sélectionnés avant commande. | Le Panier contient deux articles. |
+| LignePanier | Élément du panier correspondant à un produit et une quantité. | Une LignePanier de 2 t-shirts. |
+| Commande | Ensemble des produits validés par le client après paiement. | La Commande #1024 est créée. |
+| LigneCommande | Détail d’un produit spécifique dans une commande. | Une LigneCommande pour un casque audio. |
+| StatutCommande | État d’avancement d’une commande (créée, payée, préparée, expédiée, livrée, annulée). | Le StatutCommande passe à “Expédiée”. |
+| Paiement | Transaction financière liée à une commande. | Le Paiement par carte est validé. |
+| StatutPaiement | État du paiement (validé, refusé). | Le StatutPaiement est “Refusé”. |
+| Stock | Quantité disponible d’un produit dans l’entrepôt. | Le Stock passe de 10 à 9. |
+| Entrepot | Lieu physique de stockage et de préparation des commandes. | L’Entrepot de Lyon prépare les colis. |
+| PreparationCommande | Processus logistique de préparation des commandes. | La PreparationCommande est lancée. |
+| PreparateurCommande | Employé chargé de préparer les commandes. | Le PreparateurCommande emballe le colis. |
+| Colis | Ensemble des produits emballés prêts à être expédiés. | Le Colis est remis au transporteur. |
+| Livraison | Processus d’acheminement du colis vers le client. | La Livraison est en cours. |
+| SuiviLivraison | Informations permettant de suivre l’état de la livraison. | Le SuiviLivraison indique “Livré”. |
+| AdresseLivraison | Adresse choisie par le client pour recevoir le colis. | AdresseLivraison à Lyon. |
+| RetardLivraison | Dépassement du délai de livraison prévu. | Un RetardLivraison de 24h. |
+| RetourProduit | Processus de retour d’un produit par le client. | RetourProduit pour article défectueux. |
+| Notification | Message envoyé suite à un événement métier. | Notification de livraison envoyée. |
+| ResponsableEcommerce | Acteur supervisant les performances commerciales et logistiques. | Le ResponsableEcommerce analyse les ventes. |
+
+---
+
+## Termes par contexte
+
+| Terme | Contexte principal | Commentaire (facultatif) |
+|------|--------------------|--------------------------|
+| Commande | ContexteCommande | Agrégat racine représentant le cycle de vie d’une commande. |
+| LigneCommande | ContexteCommande | Élément interne à la commande. |
+| StatutCommande | ContexteCommande | Représente l’état métier global de la commande. |
+| Panier | ContexteCommande | Utilisé avant la création de la commande. |
+| Paiement | ContextePaiement | Interaction avec un système de paiement externe. |
+| StatutPaiement | ContextePaiement | Résultat d’une transaction financière. |
+| Stock | ContexteStock | Quantité disponible et réservée des produits. |
+| Entrepot | ContexteStock | Lieu physique lié à la gestion des stocks. |
+| PreparationCommande | ContextePréparationCommande | Processus interne de préparation logistique. |
+| PreparateurCommande | ContextePréparationCommande | Acteur opérationnel de l’entrepôt. |
+| Colis | ContexteLivraison | Support physique de la livraison. |
+| Livraison | ContexteLivraison | Processus d’acheminement du colis. |
+| SuiviLivraison | ContexteLivraison | Informations exposées au client. |
+| RetardLivraison | ContexteLivraison | Incident logistique géré par le transport. |
+| RetourProduit | ContexteCommande | Extension du cycle de vie de la commande. |
+| Notification | Generic | Service technique transverse déclenché par événements. |
+| CatalogueProduit | Supporting | Support à la vente, non différenciant. |
+| Produit | Supporting | Entité métier partagée mais secondaire. |
+| ResponsableEcommerce | ContexteAnalyseEtReporting | Consommateur des indicateurs de performance. |
+
