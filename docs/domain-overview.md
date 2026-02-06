@@ -28,22 +28,4 @@
 
 ## Schéma simplifié des sous-domaines
 
-```
-                +----------------------+
-                |      CORE DOMAIN     |
-                |----------------------|
-                | Commande & Livraison |
-                | Gestion des stocks   |
-                | Préparation commande |
-                +----------+-----------+
-                           |
-        ----------------------------------------------
-        |                                            |
-+----------------------+              +----------------------+
-|  SUPPORTING DOMAINS  |              |   GENERIC DOMAINS    |
-|----------------------|              |----------------------|
-| Catalogue produit    |              | Paiement en ligne    |
-| Retours/remboursement|              | Authentification     |
-| Reporting direction  |              | Notifications        |
-+----------------------+              +----------------------+
-```
+voir domain-overview.png
