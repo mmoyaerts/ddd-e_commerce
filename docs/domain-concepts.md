@@ -27,7 +27,7 @@ Elle constitue un élément central du métier.
 
 - Une commande ne peut pas être expédiée tant que le paiement n’est pas validé.
 - Une commande livrée ne peut plus être annulée.
-- Le montant total doit toujours être supérieur à zéro.
+- Le montant total de la commande doit toujours être supérieur à zéro.
 
 ---
 
@@ -50,7 +50,7 @@ Elle est directement liée à l’expérience client.
 #### Invariants métier
 
 - Une livraison ne peut concerner qu’un seul client.
-- Une livraison livrée ne peut pas repasser à l’état “en cours”.
+- Une livraison livrée ne peut plus changer d'état.
 
 ---
 
@@ -63,12 +63,11 @@ Elle ne possède pas d’identité propre et est définie uniquement par ses val
 
 #### Propriétés
 
-- Nom du client
+- Client
 - Rue
 - CodePostal
 - Ville
 - Pays
-
 
 #### Immuabilité
 
