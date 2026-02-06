@@ -20,7 +20,7 @@ Voir docs/context-map.png
 
 * **Type :** API REST externe avec Anticorruption Layer
 * **Bounded Contexts :** ContexteCommande, ContextePaiement
-* **Cas d’usage :** Lorsqu’un client valide une commande, le ContexteCommande appelle le service de paiement externe. L’ACL traduit la réponse du fournisseur en événements métier internes comme *CommandePayée* ou *PaiementRefusé*. Cela protège le cœur métier contre les changements de fournisseur.
+* **Cas d’usage :** Lorsqu’un client valide une commande, le ContexteCommande appelle le service de paiement externe. La réponse du fournisseur va être transformée en événements métier internes comme *CommandePayée* ou *PaiementRefusé*. Cela protège le cœur métier contre les changements de fournisseur.
 
 ### 2. Événements métier via broker (Kafka/RabbitMQ)
 
