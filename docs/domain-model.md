@@ -33,8 +33,6 @@ Diagramme UML conceptuel représentant les entités, objets valeur et leurs rela
 (voir diagramme.png)
 
 
-Commande utilise StatutCommande (objet valeur)
-
 
 Relations :
 - Un client peut avoir plusieurs commandes
