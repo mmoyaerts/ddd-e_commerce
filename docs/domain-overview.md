@@ -28,4 +28,4 @@
 
 ## Schéma simplifié des sous-domaines
 
-voir domain-overview.png
+voir docs/domain-overview.png
