@@ -7,8 +7,8 @@
 **Entités / Objets de Valeur internes :**
 
 * LigneCommande
-* AdresseLivraison (VO)
-* StatutCommande (VO)
+* AdresseLivraison (OV)
+* StatutCommande (OV)
 * Paiement (référence externe)
 
 ### Invariants
@@ -28,9 +28,9 @@
 **Entités / Objets de Valeur internes :**
 
 * Colis
-* AdresseLivraison (VO)
-* SuiviLivraison (VO)
-* StatutLivraison (VO)
+* AdresseLivraison (OV)
+* SuiviLivraison (OV)
+* StatutLivraison (OV)
 * Transporteur (référence externe)
 
 ### Invariants
