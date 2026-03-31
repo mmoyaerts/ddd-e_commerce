@@ -15,3 +15,7 @@ Le transporteur met à jour le statut de la livraison (expédiée, en cours, liv
 Le client reçoit des notifications à chaque étape clé (commande validée, expédition, livraison). Une fois la livraison effectuée, la commande est marquée comme livrée. Les événements sont également envoyés au ContexteAnalyseEtReporting pour alimenter les tableaux de bord.
 
 ---
+
+# Schéma de séquence
+
+(voir diagramme_test.png)
