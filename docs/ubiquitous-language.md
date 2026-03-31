@@ -43,6 +43,7 @@ Certains termes sont **contextuels** et prennent leur sens principal dans un Bou
 |------|--------------------|--------------------------|
 | Commande | ContexteCommande | Agrégat racine représentant le cycle de vie d’une commande. |
 | LigneCommande | ContexteCommande | Élément interne à la commande. |
+| MontantTotal | ContexteCommande | Prix total de la commande
 | StatutCommande | ContexteCommande | Représente l’état métier global de la commande. |
 | Panier | ContexteCommande | Utilisé avant la création de la commande. |
 | Paiement | ContextePaiement | Interaction avec un système de paiement externe. |
