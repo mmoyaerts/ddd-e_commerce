@@ -43,7 +43,7 @@
 
 ---
 
-## Schéma UML des agrégats (simplifié)
+## Schéma UML des agrégats
 
 ```
 +---------------------+
