@@ -1,8 +1,8 @@
- Modèle de domaine
+# Modèle de domaine
 
 Ce document formalise le modèle conceptuel du domaine e-commerce & livraison.
-Il présente les principales entités, les objets valeur et leurs relations,
-sans considération technique ou d’implémentation.
+Il couvre l’ensemble des bounded contexts identifiés et décrit les principales
+entités et objets valeur du système.
 
 ---
 
@@ -10,9 +10,14 @@ sans considération technique ou d’implémentation.
 
 | Entité | Description métier | Identifiant métier |
 |------|--------------------|-------------------|
-| Client | Le client représente une personne utilisant la plateforme e-commerce pour consulter le catalogue, passer des commandes et suivre ses livraisons. Il possède des informations personnelles et peut avoir plusieurs commandes associées. Le client est au centre de l’expérience utilisateur et interagit avec le système tout au long du cycle de vente. | ClientId |
-| Commande | La commande représente l’engagement d’achat du client après validation du panier et du paiement. Elle regroupe un ensemble de produits, possède un état métier et déclenche les processus de préparation et de livraison. Elle constitue un élément central du cœur métier. | CommandeId |
-| Livraison | La livraison correspond au processus d’acheminement d’un colis vers le client final. Elle permet de suivre l’état de transport, de gérer les incidents et de confirmer la réception. Elle est directement liée à la satisfaction client. | LivraisonId |
+| Client | Le client représente une personne utilisant la plateforme e-commerce. Il consulte le catalogue, passe des commandes et suit ses livraisons. Il possède un compte et un historique d’achats. Il est au centre de l’expérience utilisateur et déclenche les principaux flux métier. | ClientId |
+| Commande | La commande représente l’engagement d’achat du client. Elle regroupe des produits, possède un statut et déclenche les processus de préparation et de livraison. Elle orchestre les interactions avec les autres contextes (paiement, stock, livraison). Elle constitue la racine d’agrégat principale du système. | CommandeId |
+| Livraison | La livraison correspond au processus d’acheminement d’un colis vers le client. Elle permet le suivi logistique, la gestion des incidents et la confirmation de réception. Elle joue un rôle clé dans la satisfaction client. | LivraisonId |
+| Produit | Le produit représente un article disponible à la vente dans le catalogue. Il possède un prix, une description et une disponibilité. Il est utilisé dans les commandes et la gestion du stock. | ProduitId |
+| Stock | Le stock représente la quantité disponible d’un produit dans un entrepôt. Il est mis à jour lors des commandes et des réapprovisionnements. Il permet d’éviter les ruptures et les surventes. | StockId |
+| Entrepot | L’entrepôt est un lieu physique où sont stockés les produits et préparées les commandes. Il centralise les opérations logistiques et la gestion du stock. | EntrepotId |
+| Colis | Le colis représente l’ensemble des produits emballés pour une commande. Il est utilisé dans le processus de livraison et possède un suivi. | ColisId |
+| Paiement | Le paiement représente la transaction financière associée à une commande. Il valide ou refuse l’achat et influence le cycle de vie de la commande. | PaiementId |
 
 ---
 
@@ -20,9 +25,14 @@ sans considération technique ou d’implémentation.
 
 | Objet Valeur | Description métier | Propriétés principales |
 |-------------|--------------------|------------------------|
-| AdresseLivraison | Représente l’adresse physique à laquelle une commande doit être livrée. Elle est définie uniquement par ses valeurs et ne possède pas d’identité propre. Toute modification entraîne la création d’une nouvelle instance. | Rue, CodePostal, Ville, Pays, InformationsComplementaires |
-| LigneCommande | Représente un produit commandé avec sa quantité et son prix au moment de l’achat. Elle n’existe que dans le contexte d’une commande et n’a pas de cycle de vie propre. | Produit, Quantite, PrixUnitaire |
-| StatutCommande | Représente l’état métier d’une commande à un instant donné. Il permet de contrôler les transitions autorisées du cycle de vie de la commande. | Valeur (Créée, Payée, Préparée, Expédiée, Livrée, Annulée) |
+| AdresseLivraison | Représente l’adresse de livraison d’une commande. Elle est définie uniquement par ses propriétés et est immuable pour garantir la traçabilité. | Rue, CodePostal, Ville, Pays, InformationsComplementaires |
+| LigneCommande | Représente un produit dans une commande avec sa quantité et son prix. Elle n’existe que dans le contexte d’une commande. | Produit, Quantite, PrixUnitaire |
+| StatutCommande | Représente l’état d’une commande dans son cycle de vie. Il permet de contrôler les transitions métier. | Créée, Payée, Préparée, Expédiée, Livrée, Annulée |
+| StatutLivraison | Représente l’état d’une livraison. Il garantit la cohérence du flux logistique. | Préparation, Expédiée, EnCours, Livrée, Échouée |
+| SuiviLivraison | Contient les informations de tracking d’un colis. Il permet de suivre l’évolution de la livraison. | Statut, Date, Localisation |
+| StatutPaiement | Représente le résultat d’un paiement. Il influence directement la commande. | Validé, Refusé |
+| Quantite | Représente une quantité de produit. Elle est toujours positive et utilisée dans le stock et les lignes de commande. | Valeur |
+| Prix | Représente une valeur monétaire associée à un produit ou une commande. | Montant, Devise |
 
 ---
 
@@ -30,14 +40,17 @@ sans considération technique ou d’implémentation.
 
 Diagramme UML conceptuel représentant les entités, objets valeur et leurs relations.
 
-(voir diagramme.png)
+(voir diagramme1.png)
 
+---
 
+## Relations principales
 
-Relations :
-- Un client peut avoir plusieurs commandes
-- Une commande appartient à un seul client
-- Une commande est composée de plusieurs lignes de commande
-- Une commande possède une adresse de livraison
-- Une commande est associée à une livraison
-- Le statut de commande est un objet valeur utilisé par la commande
+- Un client peut avoir plusieurs commandes  
+- Une commande contient plusieurs lignes de commande  
+- Une ligne de commande référence un produit  
+- Une commande possède une adresse de livraison  
+- Une commande est associée à un paiement  
+- Une commande déclenche une livraison  
+- Une livraison est liée à un colis  
+- Un produit est géré par un stock dans un entrepôt  
