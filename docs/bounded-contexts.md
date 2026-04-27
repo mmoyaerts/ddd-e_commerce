@@ -8,7 +8,3 @@
 | Reporting et tableau de bord direction     | Supporting Domain | ContexteAnalyseEtReporting      | Ce contexte exploite les données produites par les autres BCs afin de fournir des indicateurs de pilotage. Il soutient le métier sans porter de logique différenciante, en accord avec sa classification Supporting.                                                                          |
 | Suivi de commande et notifications client  | Generic Domain    | (intégré ou externe)            | Les notifications (email/SMS) sont des services techniques transverses, généralement externalisés. Elles consomment les événements métier sans influencer le modèle du domaine.                                                                                                               |
 | Gestion des retours et remboursements      | Supporting Domain | (extension du ContexteCommande) | Les retours et remboursements sont déclenchés par des événements liés aux commandes. Ils restent secondaires par rapport au flux principal et s’intègrent naturellement comme une extension du ContexteCommande.                                                                              |
-
-Schéma de séquence
-
-(voir diagramme_test.png)
